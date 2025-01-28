@@ -4,9 +4,9 @@
 #include "funcionario.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> // Para a funÃ§Ã£o strcpy
+#include <string.h> // Para a função strcpy
 
-#define MAX_FUNCIONARIOS 100 // Tamanho mÃ¡ximo da lista estÃ¡tica
+#define MAX_FUNCIONARIOS 100 // Tamanho máximo da lista estática
 
 typedef struct {
     Funcionario funcionarios[MAX_FUNCIONARIOS];
@@ -19,7 +19,7 @@ typedef struct node {
 } Node;
 
 
-// FunÃ§Ãµes para a Lista EstÃ¡tica
+// Funções para a Lista Estática
 
 void inicializaListaEstatica(ListaEstatica *lista) {
     lista->tamanho = 0;
@@ -31,15 +31,15 @@ int listaEstaticaCheia(ListaEstatica *lista) {
 
 int insereFuncionarioEstatica(ListaEstatica *lista, Funcionario funcionario) {
     if (listaEstaticaCheia(lista)) {
-        return 0; // InserÃ§Ã£o falhou
+        return 0; // Inserção falhou
     }
     lista->funcionarios[lista->tamanho] = funcionario;
     lista->tamanho++;
-    return 1; // InserÃ§Ã£o bem-sucedida
+    return 1; // Inserção bem-sucedida
 }
 
 
-// ... outras funÃ§Ãµes para a lista estÃ¡tica (remover, buscar, listar)
+// ... outras funções para a lista estática (remover, buscar, listar)
 
 Funcionario buscaFuncionarioEstatica(ListaEstatica *lista, int matricula) {
     for (int i = 0; i < lista->tamanho; i++) {
@@ -47,9 +47,9 @@ Funcionario buscaFuncionarioEstatica(ListaEstatica *lista, int matricula) {
             return lista->funcionarios[i];
         }
     }
-    // FuncionÃ¡rio nÃ£o encontrado
+    // Funcionário não encontrado
     Funcionario funcionarioNaoEncontrado;
-    // Inicializar os campos da estrutura com valores padrÃ£o ou invÃ¡lidos
+    // Inicializar os campos da estrutura com valores padrão ou inválidos
     return funcionarioNaoEncontrado;
 }
 
@@ -58,26 +58,26 @@ int removeFuncionarioEstatica(ListaEstatica *lista, int matricula) {
 
     for (i = 0; i < lista->tamanho; i++) {
         if (lista->funcionarios[i].matricula == matricula) {
-            // Encontramos o funcionÃ¡rio a ser removido
+            // Encontramos o funcionário a ser removido
             for (j = i; j < lista->tamanho - 1; j++) {
-                // Deslocamos todos os elementos apÃ³s o elemento removido para a esquerda
+                // Deslocamos todos os elementos após o elemento removido para a esquerda
                 lista->funcionarios[j] = lista->funcionarios[j + 1];
             }
             lista->tamanho--;
-            return 1; // RemoÃ§Ã£o bem-sucedida
+            return 1; // Remoção bem-sucedida
         }
     }
 
-    return 0; // FuncionÃ¡rio nÃ£o encontrado
+    return 0; // Funcionário não encontrado
 }
 
 
 void listarFuncionariosEstatica(ListaEstatica *lista) {
-    printf("FuncionÃ¡rios na lista estÃ¡tica:\n");
+    printf("Funcionários na lista estática:\n");
     for (int i = 0; i < lista->tamanho; i++) {
         printf("Nome: %s\n", lista->funcionarios[i].nome);
-        printf("MatrÃ­cula: %d\n", lista->funcionarios[i].matricula);
-        printf("SalÃ¡rio: %.2f\n\n", lista->funcionarios[i].salario);
+        printf("Matrícula: %d\n", lista->funcionarios[i].matricula);
+        printf("Salário: %.2f\n\n", lista->funcionarios[i].salario);
     }
 }
 
@@ -88,7 +88,7 @@ void salvarListaEstatica(ListaEstatica *lista, const char *nomeArquivo) {
         return;
     }
 
-    // Escreve o cabeÃ§alho do arquivo (opcional)
+    // Escreve o cabeçalho do arquivo (opcional)
     fprintf(arquivo, "Nome,Matricula,Salario\n");
 
     for (int i = 0; i < lista->tamanho; i++) {
@@ -110,16 +110,16 @@ void carregarListaEstatica(ListaEstatica *lista, const char *nomeArquivo) {
         return;
     }
 
-    // Pula a linha do cabeÃ§alho (se houver)
+    // Pula a linha do cabeçalho (se houver)
     char linha[100];
     fgets(linha, 100, arquivo);
 
     while (fgets(linha, 100, arquivo) != NULL) {
         Funcionario funcionario;
-        // Assume que os campos estÃ£o separados por vÃ­rgulas
+        // Assume que os campos estão separados por vírgulas
         sscanf(linha, "%[^,],%d,%f", funcionario.nome, &funcionario.matricula, &funcionario.salario);
         if (listaEstaticaCheia(lista)) {
-            printf("Lista estÃ¡tica cheia!\n");
+            printf("Lista estática cheia!\n");
             break;
         }
         insereFuncionarioEstatica(lista, funcionario);
