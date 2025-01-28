@@ -1,10 +1,9 @@
-#ifndef LISTA_H
-#define LISTA_H
+#ifndef LISTA_DINAMIC_H
+#define LISTA_DINAMIC_H
 
 #include "funcionario.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "lista.h"
 #include <string.h> // Para a função strcpy
 
 
@@ -84,3 +83,4 @@ int removeFuncionarioDinamica(ListaDinamica *lista, int matricula) {
 }
 // ... outras funções para a lista dinâmica (remover, buscar, listar)
 
+#endif

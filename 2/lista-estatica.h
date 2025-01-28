@@ -1,10 +1,9 @@
-#ifndef LISTA_H
-#define LISTA_H
+#ifndef LISTA_STATIC_H
+#define LISTA_STATIC_H
 
 #include "funcionario.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "lista.h"
 #include <string.h> // Para a função strcpy
 
 #define MAX_FUNCIONARIOS 100 // Tamanho máximo da lista estática
@@ -14,10 +13,10 @@ typedef struct {
     int tamanho;
 } ListaEstatica;
 
-typedef struct no {
+typedef struct node {
     Funcionario dado;
-    struct no *proximo;
-} No;
+    struct node *proximo;
+} Node;
 
 
 // Funções para a Lista Estática

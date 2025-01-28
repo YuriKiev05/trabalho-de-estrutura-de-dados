@@ -7,11 +7,14 @@ int main() {
     ListaDinamica listaDinamica;
 
     // Inicializar as listas
-    inicializaListaEstatica(listaEstatica);
-    printf("Iniciaizado")
-    
+    inicializaListaEstatica(&listaEstatica);
+    printf("Lista Estatica Iniciaizada\n");
+
+    inicializaListaDinamica(&listaDinamica);    
+    printf("Lista Estatica Iniciaizada\n");
 
     // Inserir funcionários nas listas
+
 
     // Buscar um funcionário
 
