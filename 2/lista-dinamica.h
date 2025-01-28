@@ -117,4 +117,36 @@ void salvarListaDinamica(ListaDinamica *lista, const char *nomeArquivo) {
     printf("Lista salva com sucesso em %s\n", nomeArquivo);
 }
 
+
+void carregarListaDinamica(ListaDinamica *lista, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+
+    // Pula a linha do cabeçalho (se houver)
+    char linha[100];
+    fgets(linha, 100, arquivo);
+
+    while (fgets(linha, 100, arquivo) != NULL) {
+        Funcionario funcionario;
+        // Assume que os campos estão separados por vírgulas
+        sscanf(linha, "%[^,],%d,%f", funcionario.nome, &funcionario.matricula, &funcionario.salario);
+
+        // Cria um novo nó e insere no início da lista
+        No *novoNo = (No*) malloc(sizeof(No));
+        if (novoNo == NULL) {
+            printf("Erro ao alocar memória!\n");
+            fclose(arquivo);
+            return;
+        }
+        novoNo->dado = funcionario;
+        novoNo->proximo = lista->inicio;
+        lista->inicio = novoNo;
+    }
+
+    fclose(arquivo);
+    printf("Lista carregada com sucesso!\n");
+}
 #endif
