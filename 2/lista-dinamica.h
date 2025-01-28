@@ -81,6 +81,40 @@ int removeFuncionarioDinamica(ListaDinamica *lista, int matricula) {
 
     return 0; // Funcionário não encontrado
 }
-// ... outras funções para a lista dinâmica (remover, buscar, listar)
+
+void listarFuncionariosDinamica(ListaDinamica *lista) {
+    printf("Funcionários na lista dinâmica:\n");
+    No *aux = lista->inicio;
+    while (aux != NULL) {
+        printf("Nome: %s\n", aux->dado.nome);
+        printf("Matrícula: %d\n", aux->dado.matricula);
+        printf("Salário: %.2f\n\n", aux->dado.salario);
+        aux = aux->proximo;
+    }
+}
+
+
+void salvarListaDinamica(ListaDinamica *lista, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+
+    // Escreve o cabeçalho do arquivo (opcional)
+    fprintf(arquivo, "Nome,Matricula,Salario\n");
+
+    No *aux = lista->inicio;
+    while (aux != NULL) {
+        fprintf(arquivo, "%s,%d,%.2f\n",
+                aux->dado.nome,
+                aux->dado.matricula,
+                aux->dado.salario);
+        aux = aux->proximo;
+    }
+
+    fclose(arquivo);
+    printf("Lista salva com sucesso em %s\n", nomeArquivo);
+}
 
 #endif

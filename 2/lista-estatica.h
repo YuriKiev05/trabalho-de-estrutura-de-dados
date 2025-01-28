@@ -72,4 +72,34 @@ int removeFuncionarioEstatica(ListaEstatica *lista, int matricula) {
 }
 
 
+void listarFuncionariosEstatica(ListaEstatica *lista) {
+    printf("Funcionários na lista estática:\n");
+    for (int i = 0; i < lista->tamanho; i++) {
+        printf("Nome: %s\n", lista->funcionarios[i].nome);
+        printf("Matrícula: %d\n", lista->funcionarios[i].matricula);
+        printf("Salário: %.2f\n\n", lista->funcionarios[i].salario);
+    }
+}
+
+void salvarListaEstatica(ListaEstatica *lista, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "w");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+
+    // Escreve o cabeçalho do arquivo (opcional)
+    fprintf(arquivo, "Nome,Matricula,Salario\n");
+
+    for (int i = 0; i < lista->tamanho; i++) {
+        fprintf(arquivo, "%s,%d,%.2f\n",
+                lista->funcionarios[i].nome,
+                lista->funcionarios[i].matricula,
+                lista->funcionarios[i].salario);
+    }
+
+    fclose(arquivo);
+    printf("Lista salva com sucesso em %s\n", nomeArquivo);
+}
+
 #endif
